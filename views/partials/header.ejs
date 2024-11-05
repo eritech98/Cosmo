@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> - CosmicView</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        'space-blue': '#0B3D91',
+                        'space-red': '#FC3D21',
+                        'space-gray': '#1C2541',
+                        'space-black': '#0C0E13',
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+        }
+        .shooting-star {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1));
+            border-radius: 50%;
+            animation: shoot 5s linear infinite;
+        }
+        @keyframes shoot {
+            0% { transform: translateX(0) translateY(0); opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateX(-100vw) translateY(100vh); opacity: 0; }
+        }
+        .space-gradient {
+            background: linear-gradient(to bottom, #0C0E13, #1C2541);
+        }
+    </style>
+</head>

@@ -1,0 +1,144 @@
+<%-include ('partials/header.ejs')%>;
+<body class="space-gradient text-white font-sans min-h-screen flex flex-col">
+    <div id="space-background" class="fixed inset-0 z-0 overflow-hidden">
+        <div id="stars-container"></div>
+    </div>
+
+    <nav class="bg-space-black bg-opacity-80 py-4 sticky top-0 z-50 backdrop-filter backdrop-blur-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-mono font-bold text-space-red">Cosmo</a>
+            <span class="text-sm text-gray-300">
+                Developed by <strong>Erick Olando</strong>
+            </span>
+        </div>
+    </nav>
+
+    <header class="relative py-20 overflow-hidden">
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-mono font-bold mb-4 text-space-red">Astronomy Picture of the Day</h1>
+            <p class="text-xl max-w-2xl mx-auto text-gray-300">Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12 flex-grow flex flex-col">
+        <div class="grid md:grid-cols-2 gap-8 flex-grow">
+            <div class="bg-space-gray bg-opacity-40 rounded-lg overflow-hidden shadow-lg backdrop-filter backdrop-blur-sm">
+                <div class="w-full aspect-w-16 aspect-h-9 p-4">
+                    <img src="<%= imageUrl %>" alt="<%= title %>" class="w-full h-full object-cover rounded-lg">
+                </div>
+                <div class="p-6">
+                    <h2 class="text-2xl font-mono font-bold mb-2 text-space-red"><%= title %></h2>
+                    <p class="text-gray-300 mb-4"><strong>Date:</strong> <%= new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></p>
+                </div>
+            </div>
+            <div class="space-y-6 flex flex-col">
+                <div class="bg-space-gray bg-opacity-40 rounded-lg overflow-hidden shadow-lg p-6 backdrop-filter backdrop-blur-sm flex-grow flex flex-col">
+                    <h3 class="text-2xl font-mono font-bold mb-4 text-space-red">Cosmic Insights</h3>
+                    <div class="prose prose-invert max-w-none text-gray-300 mb-6">
+                        <p><%= explanation %></p>
+                    </div>
+                    <% if (copyright) { %>
+                    <div class="mb-6 text-sm text-gray-400">
+                        <strong>Image Credit & Copyright:</strong>
+                        <p><%= copyright %></p>
+                    </div>
+                    <% } %>
+                    <div class="mt-auto flex-grow flex flex-col">
+                        <h4 class="text-xl font-mono font-bold mb-4 text-space-red">Explore Space with SpaceX</h4>
+                        <div class="flex-grow relative" style="padding-bottom: 56.25%;">
+                            <div id="youtube-player" class="absolute inset-0 w-full h-full"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-space-blue bg-opacity-40 rounded-lg overflow-hidden shadow-lg p-6 backdrop-filter backdrop-blur-sm">
+                    <h4 class="text-xl font-mono font-bold mb-2 text-space-red">Cosmic Trivia</h4>
+                    <p id="space-fact" class="text-gray-300">Preparing to blow your mind with a cosmic fact...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-space-black bg-opacity-80 py-6 mt-12">
+        <div class="container mx-auto px-4 text-center text-sm text-gray-400">
+            <p>&copy; <%= new Date().getFullYear() %> Cosmo. Created by Erick Olando. All rights reserved.</p>
+            <p class="mt-2">Image credit: NASA, ESA, CSA, STScI, or as specified in the APOD description.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars-container');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            star.style.animation = `twinkle ${Math.random() * 5 + 3}s infinite`;
+            starsContainer.appendChild(star);
+        }
+
+        // Create shooting stars
+        for (let i = 0; i < 5; i++) {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = `${Math.random() * 100}%`;
+            shootingStar.style.top = `${Math.random() * 100}%`;
+            shootingStar.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(shootingStar);
+        }
+
+        // Space facts array
+        const spaceFacts = [
+            "If you could fold a piece of paper 42 times, it would reach the moon. Good luck with that folding!",
+            "There's a planet made of diamonds. Talk about bling on a cosmic scale!",
+            "A day on Venus is longer than its year. It's the ultimate procrastinator's paradise!",
+            "If you fell into a black hole, you'd experience 'spaghettification'. Sounds delicious, right?",
+            "The biggest known star, UY Scuti, is so huge that if it replaced our Sun, it would engulf Jupiter. That's one way to solve the gas giant housing crisis!",
+            "There's a cloud of alcohol floating in space that's 288 billion miles across. The universe's biggest cocktail!",
+            "The Moon is slowly moving away from Earth at about 1.5 inches per year. Long-distance relationships are tough!",
+            "The fastest star in our galaxy is moving at 8% the speed of light. Talk about a stellar speeding ticket!",
+            "There's a planet where it rains molten glass. Sideways. Umbrella manufacturers, your next frontier awaits!",
+            "If you could put Saturn in a bathtub, it would float. Finding a big enough bathtub is your next challenge!"
+        ];
+
+        // Display random space fact
+        function displayRandomSpaceFact() {
+            const factElement = document.getElementById('space-fact');
+            const randomFact = spaceFacts[Math.floor(Math.random() * spaceFacts.length)];
+            factElement.textContent = randomFact;
+        }
+
+        // Call the function to display a random space fact
+        displayRandomSpaceFact();
+
+        // YouTube Player
+        function loadYouTubePlayer() {
+            if (typeof YT !== 'undefined' && YT.Player) {
+                new YT.Player('youtube-player', {
+                    height: '100%',
+                    width: '100%',
+                    videoId: 'TeVbYCIFVa8',
+                    playerVars: {
+                        'playsinline': 1,
+                        'rel': 0
+                    }
+                });
+            } else {
+                setTimeout(loadYouTubePlayer, 100);
+            }
+        }
+
+        // Initialize YouTube player when API is ready
+        function onYouTubeIframeAPIReady() {
+            loadYouTubePlayer();
+        }
+
+        // Ensure the YouTube player is loaded even if the API is already ready
+        if (typeof YT !== 'undefined' && YT.Player) {
+            loadYouTubePlayer();
+        }
+    </script>
+</body>
+</html>
