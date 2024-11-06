@@ -88,10 +88,6 @@ Contributions to CosmicView are welcome! Here's how you can contribute:
 
 Please ensure your code adheres to the existing style and passes all tests.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - NASA for providing the Astronomy Picture of the Day API
