@@ -101,9 +101,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Erick Olando - [Olandoerick98@gmail.com]
+Erick Olando - Olandoerick98@gmail.com
 
-Project Link: [https://erickolando.up.railway.app/)
+Project Link: (https://erickolando.up.railway.app/)
 
 ---
 
