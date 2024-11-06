@@ -2,7 +2,7 @@
 
 Cosmo is a web application that showcases NASA's Astronomy Picture of the Day (APOD) in a visually stunning and interactive manner. This project aims to make the wonders of space more accessible and engaging for everyone.
 
-![Cosmo Screenshot](https://placeholder.com/path-to-your-screenshot.png)
+![Cosmo Screenshot](images/Capture.PNG)
 
 ## Features
 
